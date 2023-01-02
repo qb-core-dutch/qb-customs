@@ -61,8 +61,8 @@ CreateThread(function()
 
         usageCombo:onPlayerInOut(function(isInsidePoint, position, data)
             isInZone = isInsidePoint
-            zoneJobName = string.sub(data.name, 9, #data.name)
             if isInsidePoint then
+                zoneJobName = string.sub(data.name, 9, #data.name)
                 if PlayerData and PlayerData.job and PlayerData.job.name == zoneJobName then
                     exports["qb-core"]:DrawText(Config.Polyzones.KeyLabel .. " - " .. Lang:t("info.usageText"))
                     Functions.StartOpenListener()

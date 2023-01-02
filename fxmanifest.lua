@@ -22,4 +22,10 @@ client_scripts {
     "client/main.lua"
 }
 
+files {
+    "html/assets/*.js",
+    "html/assets/*.css",
+    "html/index.html",
+}
+
 ui_page "html/index.html"
