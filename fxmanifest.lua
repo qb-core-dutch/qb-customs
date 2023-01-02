@@ -1,32 +1,25 @@
-fx_version 'cerulean'
-game 'gta5'
-version '1.2.0'
-
-ui_page 'html/index.html'
-
-files {
-    'html/index.html',
-    'html/css/menu.css',
-    'html/js/ui.js',
-    'html/sounds/wrench.ogg',
-    'html/sounds/respray.ogg'
-}
+fx_version "cerulean"
+game "gta5"
 
 shared_scripts {
-    'config.lua',
-    'shared/locations.lua',
-}
-
-client_scripts {
-    '@PolyZone/client.lua',
-    '@PolyZone/BoxZone.lua',
-    'client/cl_ui.lua',
-    'client/cl_bennys.lua',
+    "@qb-core/shared/locale.lua",
+    "locales/en.lua",
+    "locales/*.lua",
+    "config.lua"
 }
 
 server_scripts {
-    '@oxmysql/lib/MySQL.lua',
-    'server/sv_bennys.lua'
+    "@oxmysql/lib/MySQL.lua",
+    "server/functions.lua",
+    "server/main.lua"
 }
 
-lua54 'yes'
+client_scripts {
+    "@PolyZone/client.lua",
+    "@PolyZone/BoxZone.lua",
+    "@PolyZone/ComboZone.lua",
+    "client/functions.lua",
+    "client/main.lua"
+}
+
+ui_page "html/index.html"
