@@ -12,6 +12,8 @@ CreateThread(function()
         end
     end
 
+    SetNuiFocus(true, true)
+
     RegisterNetEvent("QBCore:Client:OnPlayerLoaded")
     AddEventHandler("QBCore:Client:OnPlayerLoaded", function()
         PlayerData = QBCore.Functions.GetPlayerData()

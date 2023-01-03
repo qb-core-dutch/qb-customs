@@ -1,21 +1,48 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import {ref} from 'vue'
+import type {Ref} from 'vue'
+import type {Tab} from '@/utils'
+import {Tabs} from '@/utils'
+
+import Header from '@components/Header.vue'
+import TabsList from '@components/TabsList.vue'
+
+const customsName: Ref<string> = ref(process.env.NODE_ENV == "development" ? "QB-Customs" : "")
+const helpText: Ref<string> = ref("Choose a tab")
+const tabs: Ref<Tab[]> = ref(Tabs)
+const currentTab: Ref<Tab | null> = ref(null)
+
+function changeTab(newTab: string) {
+    currentTab.value = newTab
+}
 </script>
 
 <template>
-  <HelloWorld msg="Vite + Vue" />
+    <v-app>
+        <div class="main">
+            <Header :name="customsName" :helpText="helpText" />
+            <TabsList :tabs="tabs" v-if="currentTab == null" @changeTab="changeTab"/>
+        </div>
+    </v-app>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.main {
+    height: calc(100% - 5vh);
+    max-height: 1080px;
+
+    min-width: 400px;
+    max-width: calc(100vw / 3);
+
+    background: #151a1f;
+    border-radius: 6px 6px 3px 3px;
+    overflow: hidden;
+    
+    position: absolute;
+    top: 2.5vh;
+    right: 2.5vh;
+
+    display: flex;
+    flex-direction: column;
 }
 </style>
