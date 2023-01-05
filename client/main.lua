@@ -1,19 +1,21 @@
 CreateThread(function()
+    -- Variables
     local prompts = {}
     local targetZoneIds = {}
     isInZone = false
     zoneJobName = nil
-    
+    CurrentJobName = nil
+    IsOpen = false
     PlayerData = QBCore.Functions.GetPlayerData()
 
+    -- Failsafes
     for i,v in pairs(Config.Positions) do
         if QBCore.Shared.Jobs[i] == nil then
             Functions.ErrorPrint("The job \"" .. i .. "\" doesn't exist.")
         end
     end
 
-    SetNuiFocus(true, true)
-
+    -- Events
     RegisterNetEvent("QBCore:Client:OnPlayerLoaded")
     AddEventHandler("QBCore:Client:OnPlayerLoaded", function()
         PlayerData = QBCore.Functions.GetPlayerData()
@@ -42,6 +44,12 @@ CreateThread(function()
         end
     end)
 
+    -- NUI Callbacks
+    RegisterNUICallback("close", function()
+        Functions.Close()
+    end)
+
+    -- Main / Open handler
     if Config.OpenType == "normal" then
         local usageZones = {}
 
@@ -166,26 +174,6 @@ CreateThread(function()
         Functions.ErrorPrint("Invalid value for Config.OpenType")
     end
 
-    RegisterNetEvent("onResourceStop", function(resourceName)
-        if GetCurrentResourceName() == resourceName then
-            if Config.OpenType == "proximity" then
-                for i = 1, #prompts do
-                    prompts[i]:Remove()
-                end
-            elseif Config.OpenType == "target" then
-                if Config.Target.Script == "qb-target" then
-                    for i,v in pairs(Config.Positions) do
-                        exports["qb-target"]:RemoveZone("customs-" .. i)
-                    end
-                elseif Config.Target.Script == "ox_target" then
-                    for i = 1, #targetZoneIds do
-                        exports["ox_target"]:removeZone(targetZoneIds[i])
-                    end
-                end
-            elseif Config.OpenType == "normal" then
-                ComboZone:RemoveZone("customsZones")
-            end
-        end
-    end)
+    Functions.Open()
 end)
 

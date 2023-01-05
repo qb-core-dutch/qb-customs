@@ -2,7 +2,18 @@ QBCore = exports['qb-core']:GetCoreObject()
 
 Functions = {
     Open = function(jobName)
+        IsOpen = false
+        CurrentJobName = jobName
 
+        SetNuiFocus(true, true)
+        SendNUIMessage({
+            action = "open"
+        })
+    end,
+
+    Close = function()
+        IsOpen = false
+        SetNuiFocus(false, false)
     end,
 
     ErrorPrint = function(text)
