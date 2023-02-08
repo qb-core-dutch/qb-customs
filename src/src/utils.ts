@@ -5,6 +5,7 @@ export interface Option {}
 export interface Tab {
   name: string;
   label: string;
+  price: number;
   subCategories?: Tab[];
   options?: Option[];
 }

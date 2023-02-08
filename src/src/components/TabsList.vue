@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
+
 const props = defineProps(["tabs", "isOptions"]);
 const emit = defineEmits(["changeTab", "clickOption"]);
+let formatter = new Intl.NumberFormat("de-DE", {
+  style: "currency",
+  currency: "EUR",
+});
 
 function handleTab(newTab: string) {
   if (props.isOptions) {
@@ -8,6 +14,23 @@ function handleTab(newTab: string) {
   } else {
     emit("changeTab", newTab);
   }
+}
+
+onMounted(() => {
+  window.addEventListener("message", (e: MessageEvent) => {
+    switch (e.data.action) {
+      case "setup":
+        formatter = new Intl.NumberFormat("de-DE", {
+          style: "currency",
+          currency: e.data.currency,
+        });
+        break;
+    }
+  });
+});
+
+function getFormattedNum(num: number) {
+  return formatter.format(num);
 }
 </script>
 
@@ -20,7 +43,10 @@ function handleTab(newTab: string) {
       @click="handleTab(tab)"
       v-ripple
     >
-      {{ tab.label }}
+      <div class="label">{{ tab.label }}</div>
+      <div class="price">
+        {{ tab.price !== undefined ? `${getFormattedNum(tab.price)}` : "" }}
+      </div>
     </div>
   </div>
 </template>
@@ -45,16 +71,27 @@ function handleTab(newTab: string) {
 
   padding: 0.25rem 1rem;
 
-  color: #fff;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.label {
+  flex: 1;
+}
+
+.label,
+.price {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 1.1rem;
+  color: #fff;
 }
 
 .tab-item:hover {
   cursor: pointer;
 
-  background: #fff;
+  background: #1e242b;
   color: #000;
 }
 

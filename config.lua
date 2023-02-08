@@ -31,32 +31,72 @@ Config.Positions = {
     ["mechanic"] = {pos = vector4(-338.8177, -135.7519, 39.0026, 82.3405)}
 }
 
+Config.Prices = {
+    cosmetics = 400,
+    respray = 1000,
+    engine = {0, 3250, 5500, 10450, 15250, 20500, 25000},
+    brakes = {0, 3250, 5500, 10450, 15250, 20500, 25000},
+    transmission = {0, 3250, 5500, 10450, 15250, 20500, 25000},
+    suspension = {0, 3250, 5500, 10450, 15250, 20500, 25000},
+    armor = {0, 3250, 5500, 10450, 15250, 20500, 25000},
+    turbo = {0, 15000},
+    wheels = 400,
+    customwheels = 600,
+    wheelsmoke = 400,
+    windowtint = 400,
+    neonside = 100,
+    neoncolours = 500,
+    headlights = 100,
+    xenoncolours = 500,
+    horn = 500,
+    livery = 500,
+    plateindex = 1000
+}
+
 -- Dont touch if you dont know what you are doing
 Config.VehicleCustomisation = {
-    {category = "Spoiler", id = 0}, {category = "Front Bumper", id = 1},
-    {category = "Rear Bumper", id = 2}, {category = "Side Skirt", id = 3},
-    {category = "Exhaust", id = 4}, {category = "Roll Cage", id = 5},
-    {category = "Grille", id = 6}, {category = "Hood", id = 7},
-    {category = "Left Fender", id = 8}, {category = "Right Fender", id = 9},
-    {category = "Roof", id = 10}, {category = "Engine Upgrade", id = 11},
-    {category = "Brake Upgrade", id = 12},
-    {category = "Transmission Upgrade", id = 13},
-    {category = "Suspension Upgrade", id = 15},
-    {category = "Armour Upgrade", id = 16},
-    {category = "Turbo Upgrade", id = 18}, {category = "Vanity Plate", id = 25},
-    {category = "Trim A", id = 27}, {category = "Ornaments", id = 28},
-    {category = "Dashboard", id = 29}, {category = "Dial", id = 30},
-    {category = "Door Speaker", id = 31}, {category = "Seats", id = 32},
-    {category = "Steering Wheel", id = 33},
-    {category = "Shifter Leaver", id = 34}, {category = "Plaque", id = 35},
-    {category = "Speaker", id = 36}, {category = "Trunk", id = 37},
-    {category = "Hydraulic", id = 38}, {category = "Engine Block", id = 39},
-    {category = "Air Filter", id = 40}, {category = "Strut", id = 41},
-    {category = "Arch Cover", id = 42}, {category = "Aerial", id = 43},
-    {category = "Trim B", id = 44}, {category = "Fuel Tank", id = 45},
-    {category = "Window", id = 46}, {category = "Livery", id = 48}, {
+    {category = "Spoiler", id = 0, pricing = "cosmetics"},
+    {category = "Front Bumper", id = 1, pricing = "cosmetics"},
+    {category = "Rear Bumper", id = 2, pricing = "cosmetics"},
+    {category = "Side Skirt", id = 3, pricing = "cosmetics"},
+    {category = "Exhaust", id = 4, pricing = "cosmetics"},
+    {category = "Roll Cage", id = 5, pricing = "cosmetics"},
+    {category = "Grille", id = 6, pricing = "cosmetics"},
+    {category = "Hood", id = 7, pricing = "cosmetics"},
+    {category = "Left Fender", id = 8, pricing = "cosmetics"},
+    {category = "Right Fender", id = 9, pricing = "cosmetics"},
+    {category = "Roof", id = 10, pricing = "cosmetics"},
+    {category = "Engine Upgrade", id = 11, pricing = "engine"},
+    {category = "Brake Upgrade", id = 12, pricing = "brakes"},
+    {category = "Transmission Upgrade", id = 13, pricing = "transmission"},
+    {category = "Suspension Upgrade", id = 15, pricing = "suspension"},
+    {category = "Armour Upgrade", id = 16, pricing = "armor"},
+    {category = "Turbo Upgrade", id = 18, pricing = "turbo"},
+    {category = "Vanity Plate", id = 25, pricing = "cosmetics"},
+    {category = "Trim A", id = 27, pricing = "cosmetics"},
+    {category = "Ornaments", id = 28, pricing = "cosmetics"},
+    {category = "Dashboard", id = 29, pricing = "cosmetics"},
+    {category = "Dial", id = 30, pricing = "cosmetics"},
+    {category = "Door Speaker", id = 31, pricing = "cosmetics"},
+    {category = "Seats", id = 32, pricing = "cosmetics"},
+    {category = "Steering Wheel", id = 33, pricing = "cosmetics"},
+    {category = "Shifter Leaver", id = 34, pricing = "cosmetics"},
+    {category = "Plaque", id = 35, pricing = "cosmetics"},
+    {category = "Speaker", id = 36, pricing = "cosmetics"},
+    {category = "Trunk", id = 37, pricing = "cosmetics"},
+    {category = "Hydraulic", id = 38, pricing = "cosmetics"},
+    {category = "Engine Block", id = 39, pricing = "cosmetics"},
+    {category = "Air Filter", id = 40, pricing = "cosmetics"},
+    {category = "Strut", id = 41, pricing = "cosmetics"},
+    {category = "Arch Cover", id = 42, pricing = "cosmetics"},
+    {category = "Aerial", id = 43, pricing = "cosmetics"},
+    {category = "Trim B", id = 44, pricing = "cosmetics"},
+    {category = "Fuel Tank", id = 45, pricing = "cosmetics"},
+    {category = "Window", id = 46, pricing = "windowtint"},
+    {category = "Livery", id = 48, pricing = "livery"}, {
         category = "Horn",
         id = 14,
+        pricing = "horn",
         options = {
             {name = "Truck Horn", id = 0}, {name = "Cop Horn", id = 1},
             {name = "Clown Horn", id = 2}, {name = "Musical Horn 1", id = 3},
@@ -100,7 +140,8 @@ Config.VehicleCustomisation = {
     }
 }
 
-Config.VehicleResprayOptions = {
+-- COLORS
+Config.ResprayOptions = {
     {
         category = "Standard",
         id = 0,

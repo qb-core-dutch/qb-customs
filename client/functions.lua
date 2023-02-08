@@ -24,6 +24,24 @@ Functions = {
 
     UnPreviewClick = function(tabId, optionId) end,
 
+    GetPricingFromIdx = function(idx1, idx2)
+        if idx1 and idx2 then
+            local data = Config.VehicleCustomisation[idx1]
+            if data then
+                local price = Config.Prices[data.pricing]
+                if price == nil then
+                    return 0
+                elseif type(price) == "table" then
+                    return price[idx2]
+                else
+                    return price
+                end
+            end
+        end
+
+        return 0
+    end,
+
     GetTabData = function(veh)
         local tabData = {}
 
@@ -65,14 +83,20 @@ Functions = {
                 for i2 = 1, modNum, 1 do
                     local label = GetLabelText(
                                       GetModTextLabel(veh, tonumber(tab.id), i2))
+                    local price = Functions.GetPricingFromIdx(i, i2)
+
                     if label == "NULL" then
                         table.insert(tabFormatted.options, {
                             name = tostring(i2),
-                            label = tab.category .. " " .. tostring(i2)
+                            label = tab.category .. " " .. tostring(i2),
+                            price = price
                         })
                     else
-                        table.insert(tabFormatted.options,
-                                     {name = tostring(i2), label = label})
+                        table.insert(tabFormatted.options, {
+                            name = tostring(i2),
+                            label = label,
+                            price = price
+                        })
                     end
                 end
             end
