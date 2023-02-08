@@ -27,6 +27,9 @@ Config.Polyzones.Size = {2, 2}
 Config.Polyzones.KeyLabel = "E"
 Config.Polyzones.KeyNumber = 38 -- https://docs.fivem.net/docs/game-references/controls/
 
+-- Javascript alpahabetical currency code should be used for this, https://www.techonthenet.com/js/currency_codes.php
+Config.Currency = "USD"
+
 Config.Positions = {
     ["mechanic"] = {pos = vector4(-338.8177, -135.7519, 39.0026, 82.3405)}
 }

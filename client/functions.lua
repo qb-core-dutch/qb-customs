@@ -4,6 +4,7 @@ Functions = {
     Open = function(jobName)
         local veh = GetVehiclePedIsIn(PlayerPedId(), false)
         if veh > 0 then
+            currentVehicle = veh
             IsOpen = false
             CurrentJobName = jobName
 
@@ -13,6 +14,14 @@ Functions = {
                 newTabs = Functions.GetTabData(veh)
             })
 
+            if firstOpen then
+                firstOpen = false
+                SendNUIMessage({
+                    action = "firstSetup",
+                    currency = Config.Currency
+                })
+            end
+
             SetNuiFocus(true, true)
             SendNUIMessage({action = "open"})
         end
@@ -20,9 +29,29 @@ Functions = {
 
     HandleOptionClick = function(tabId, optionId) end,
 
-    PreviewClick = function(tabId, optionId) end,
+    Preview = function(data)
+        if currentVehicle ~= nil then
+            if DoesEntityExist(currentVehicle) then
+                currentPreviews[tonumber(data.tabIdx)] = tonumber(data.name)
+                SetVehicleMod(currentVehicle, tonumber(data.tabIdx),
+                              tonumber(data.name))
+            else
+                currentVehicle = nil
+            end
+        end
+    end,
 
-    UnPreviewClick = function(tabId, optionId) end,
+    UnPreview = function(data)
+        if currentVehicle ~= nil then
+            if DoesEntityExist(currentVehicle) and
+                currentPreviews[tonumber(data.tabIdx)] then
+                currentPreviews[tonumber(data.tabIdx)] = nil
+                SetVehicleMod(currentVehicle, tonumber(data.tabIdx), 0)
+            else
+                currentVehicle = nil
+            end
+        end
+    end,
 
     GetPricingFromIdx = function(idx1, idx2)
         if idx1 and idx2 then
@@ -71,6 +100,8 @@ Functions = {
                     local option = tab.options[i2]
                     local optionFormatted = {}
 
+                    local price = Functions.GetPricingFromIdx(i, i2)
+
                     optionFormatted.name = tostring(option.id)
                     optionFormatted.label = option.name
 
@@ -89,13 +120,15 @@ Functions = {
                         table.insert(tabFormatted.options, {
                             name = tostring(i2),
                             label = tab.category .. " " .. tostring(i2),
-                            price = price
+                            price = price,
+                            tabIdx = i
                         })
                     else
                         table.insert(tabFormatted.options, {
                             name = tostring(i2),
                             label = label,
-                            price = price
+                            price = price,
+                            tabIdx = i
                         })
                     end
                 end
@@ -111,6 +144,7 @@ Functions = {
 
     Close = function()
         IsOpen = false
+        currentPreviews = {}
         SetNuiFocus(false, false)
     end,
 

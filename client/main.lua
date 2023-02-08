@@ -2,10 +2,13 @@ CreateThread(function()
     -- Variables
     local prompts = {}
     local targetZoneIds = {}
+    firstOpen = true
     isInZone = false
     zoneJobName = nil
+    currentPreviews = {}
     CurrentJobName = nil
     IsOpen = false
+    currentVehicle = nil
     PlayerData = QBCore.Functions.GetPlayerData()
 
     -- Failsafes
@@ -55,12 +58,12 @@ CreateThread(function()
     end)
 
     RegisterNUICallback("previewOption", function(data, cb)
-        Functions.PreviewClick(data.tab, data.option)
+        Functions.Preview(data)
         cb("ok")
     end)
 
     RegisterNUICallback("unPreviewOption", function(data, cb)
-        Functions.UnPreviewClick(data.tab, data.option)
+        Functions.UnPreview(data)
         cb("ok")
     end)
 

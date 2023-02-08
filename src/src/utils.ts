@@ -1,6 +1,11 @@
 import axios, { AxiosError } from "axios";
 
-export interface Option {}
+export interface Option {
+  name: string;
+  label: string;
+  price: number;
+  tabIdx: number;
+}
 
 export interface Tab {
   name: string;

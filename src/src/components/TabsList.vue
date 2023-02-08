@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
+import type { Tab, Option } from "../utils";
+import { axiosPost } from "../utils";
 
 const props = defineProps(["tabs", "isOptions"]);
 const emit = defineEmits(["changeTab", "clickOption"]);
 let formatter = new Intl.NumberFormat("de-DE", {
   style: "currency",
-  currency: "EUR",
+  currency: "USD",
 });
 
-function handleTab(newTab: string) {
+function handleTab(newTab: string): void {
   if (props.isOptions) {
     emit("clickOption", newTab);
   } else {
@@ -16,10 +18,22 @@ function handleTab(newTab: string) {
   }
 }
 
+function previewOption(data: Tab | Option): void {
+  if (props.isOptions == true) {
+    axiosPost("previewOption", data);
+  }
+}
+
+function unPreviewOption(data: Tab | Option): void {
+  if (props.isOptions == true) {
+    axiosPost("unPreviewOption", data);
+  }
+}
+
 onMounted(() => {
   window.addEventListener("message", (e: MessageEvent) => {
     switch (e.data.action) {
-      case "setup":
+      case "firstSetup":
         formatter = new Intl.NumberFormat("de-DE", {
           style: "currency",
           currency: e.data.currency,
@@ -42,6 +56,8 @@ function getFormattedNum(num: number) {
       :key="tab.name"
       @click="handleTab(tab)"
       v-ripple
+      @mouseover="previewOption(tab)"
+      @mouseleave="unPreviewOption(tab)"
     >
       <div class="label">{{ tab.label }}</div>
       <div class="price">
