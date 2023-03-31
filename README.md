@@ -1,3 +1,9 @@
+# **TEMPORARY INFO (W.I.P)**
+
+**This project is currently not close to being production ready, therefore we recommend against you using it on your server.**
+
+**If you wish to contribute to the project then please open an Pull Request. Do not open an issue about the script not being finished.**
+
 # qb-customs
 Vehicle Customization For QB-Core
 
