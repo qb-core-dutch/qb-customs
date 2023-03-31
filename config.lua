@@ -11,7 +11,7 @@ Config.OpenType = "normal"
 
 -- Only for Config.OpenType "target"
 -- qb-target or ox_target
-Config.Target.Script = "ox_target"
+Config.Target.Script = "QB-target"
 Config.Target.UsageDistance = 2.5
 Config.Target.Icon = "fa-solid fa-wrench"
 Config.Target.Size = {2, 2, 2} -- 2 numbers if qb-target, 3 numbers if ox_target
